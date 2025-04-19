@@ -83,7 +83,7 @@ export function About() {
           <div className="flex flex-col items-center">
             <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary mb-4 md:mb-6 dark:hover-glow">
               <Image 
-                src="/images/profile.jpg" 
+                src="/images/profile.JPG" 
                 alt="Professional headshot of me in a dark suit with a purple tie" 
                 fill 
                 className="object-cover object-[center_0.0005%] scale-110"
