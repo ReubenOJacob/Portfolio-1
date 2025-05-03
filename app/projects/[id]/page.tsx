@@ -384,7 +384,7 @@ const projectsData = [
     githubUrlText: "View My Published Article",
     competitionUrl: "https://suas-competition.org/",
     competitionUrlText: "Learn About AUVSI SUAS",
-    timeline: "Sep 2017 – Jun 2018",
+    timeline: "Dec 2017 – Jan 2022",
     client: "Ramaiah Institute of Technology",
     role: "Product Manager – Navigations and Systems Engineering",
     outcomes: [
