@@ -70,6 +70,17 @@ export function About() {
         "Led A/B testing in Optimizely to optimize website design, boosting subscription revenue by 20%",
       ],
     },
+    {
+      role: "Product Manager – Navigations and Systems Engineering",
+      company: "Edhitha Unmanned Aerial Systems",
+      companyUrl: "https://suas-competition.org/",
+      years: "Dec. 2017 – Jan. 2022",
+      achievements: [
+        "Led the development of autonomous UAV systems over 4 years, guiding the team to a top-10 international competition finish and delivering multiple high-impact prototypes",
+        "Oversaw end-to-end project execution from requirements to deployment using tools like Gantt charts and Kanban boards",
+        "Managed the full product lifecycle from user requirements and prototyping to launch using Jira for iterative testing, resulting in a 30% improvement in system accuracy",
+      ],
+    },
   ]
 
   return (
@@ -83,7 +94,7 @@ export function About() {
           <div className="flex flex-col items-center">
             <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary mb-4 md:mb-6 dark:hover-glow">
               <Image 
-                src="/images/profile.jpg" 
+                src="/images/profile.JPG" 
                 alt="Professional headshot of me in a dark suit with a purple tie" 
                 fill 
                 className="object-cover object-[center_0.0005%] scale-110"

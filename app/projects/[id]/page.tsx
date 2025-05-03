@@ -355,11 +355,13 @@ const projectsData = [
     description:
       "Led the end-to-end development and project management of an advanced Unmanned Autonomous Aerial System (UAS) for the 2018 AUVSI SUAS Competition.",
     fullDescription: `
-      <p>I led the end-to-end development and project management of Edhitha's advanced Unmanned Autonomous Aerial System (UAS), steering a multidisciplinary student team to compete in the 2018 AUVSI Student Unmanned Aerial Systems (SUAS) Competition, an international challenge for autonomous UAVs.</p>
+      <p>Over a four-year period, I led the end-to-end development and project management of Edhitha's Unmanned Autonomous Aerial System (UAS), guiding a multidisciplinary student team through successive iterations of design, testing, and competition. This culminated in our participation in the 2018 AUVSI Student Unmanned Aerial Systems (SUAS) Competition, a prestigious international challenge focused on autonomous UAV capabilities.</p>
       
-      <p>My responsibilities included defining project scope and objectives, developing a detailed timeline with clear milestones, and allocating resources to balance technical and operational needs. I implemented strategic planning and risk management practices, ensuring the project met regulatory requirements and competition standards. I coordinated cross-functional collaboration, mentored junior engineers, and fostered a culture of innovation and adaptability to address technical and logistical challenges.</p>
+      <p>Throughout the project lifecycle, I defined long-term goals, established evolving scopes and priorities, and maintained a detailed roadmap with clear milestones across academic years. I strategically allocated resources to meet shifting technical and operational demands, while embedding robust planning and risk mitigation frameworks to navigate regulatory and competition standards.</p>
       
-      <p>I oversaw the integration of hardware and custom navigation algorithms, managed budget and equipment procurement, and maintained effective communication with stakeholders, including faculty advisors and sponsors. I also prepared comprehensive technical documentation and led the team's competition presentations.</p>
+      <p>I drove collaboration between mechanical, electrical, and software sub-teams, mentored incoming team members, and cultivated a culture of continuous learning and technical excellence. I oversaw the design and integration of hardware platforms, the development of custom navigation and control algorithms, and iterative testing procedures.</p>
+      
+      <p>Additionally, I managed budgeting and procurement activities across multiple funding cycles, ensured consistent communication with stakeholders—including faculty advisors and sponsors—and produced comprehensive technical documentation. I also led the team's presentations during annual evaluations, ensuring alignment between our engineering outcomes and competition objectives.</p>
     `,
     image: "/images/edhitha-uas-title.jpg",
     gallery: [
@@ -384,7 +386,7 @@ const projectsData = [
     githubUrlText: "View My Published Article",
     timeline: "Sep 2017 – Jun 2018",
     client: "Ramaiah Institute of Technology",
-    role: "Lead Navigation Engineer & Project Manager",
+    role: "Product Manager – Navigations and Systems Engineering",
     outcomes: [
       "Achieved 10th place out of 69 teams at the 2018 AUVSI SUAS Competition, competing against top international universities",
       "Featured in The Indian Express for innovative UAV design and competition performance",

@@ -7,9 +7,11 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Reuben Jacob - Product Manager & Data Analyst",
-  description: "Portfolio showcasing expertise in product management and data analytics",
-  generator: "v0.dev",
+  title: "Reuben Jacob",
+  description: "Product Manager & Data Analyst specializing in data-driven product strategy and user-centered solutions.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({
