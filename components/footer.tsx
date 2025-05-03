@@ -39,14 +39,6 @@ export function Footer() {
 
         <div className="border-t mt-6 md:mt-8 pt-6 md:pt-8 text-center text-xs md:text-sm text-muted-foreground">
           <p>© {currentYear} Reuben Jacob. All rights reserved.</p>
-          <div className="flex justify-center gap-4 mt-2">
-            <Link href="#" className="hover:text-primary transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="hover:text-primary transition-colors">
-              Terms of Service
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
