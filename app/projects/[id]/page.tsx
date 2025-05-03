@@ -380,10 +380,10 @@ const projectsData = [
       "Flight Testing",
       "AUVSI SUAS Competition"
     ],
-    liveUrl: "https://suas-competition.org/",
-    liveUrlText: "Learn About AUVSI SUAS",
     githubUrl: "https://www.newindianexpress.com/cities/bengaluru/2018/Jun/25/city-lads-impress-with-electric-unmanned-plane-1833236.html",
     githubUrlText: "View My Published Article",
+    competitionUrl: "https://suas-competition.org/",
+    competitionUrlText: "Learn About AUVSI SUAS",
     timeline: "Sep 2017 – Jun 2018",
     client: "Ramaiah Institute of Technology",
     role: "Product Manager – Navigations and Systems Engineering",
@@ -647,6 +647,27 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                         >
                           <span className="text-sm font-medium">
                             {project.githubUrlText || "View Project"}
+                          </span>
+                        </a>
+                      </Button>
+                    </div>
+                  )}
+
+                  {project.competitionUrl && (
+                    <div className="pt-4 border-t">
+                      <Button 
+                        asChild 
+                        size="sm" 
+                        className="w-full dark:hover-glow"
+                      >
+                        <a 
+                          href={project.competitionUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-2"
+                        >
+                          <span className="text-sm font-medium">
+                            {project.competitionUrlText || "View Competition"}
                           </span>
                         </a>
                       </Button>
