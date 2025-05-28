@@ -74,7 +74,7 @@ export function About() {
       role: "Product Manager – Navigations and Systems Engineering",
       company: "Edhitha Unmanned Aerial Systems",
       companyUrl: "https://suas-competition.org/",
-      years: "Dec. 2017 – Jan. 2022",
+      years: "Dec. 2017 – Jan. 2020",
       achievements: [
         "Led the development of autonomous UAV systems over 4 years, guiding the team to a top-10 international competition finish and delivering multiple high-impact prototypes",
         "Oversaw end-to-end project execution from requirements to deployment using tools like Gantt charts and Kanban boards",
