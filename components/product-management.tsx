@@ -142,7 +142,7 @@ export function ProductManagement() {
         </p>
 
         <Tabs defaultValue="product" className="w-full">
-          <TabsList className="grid grid-cols-3 mb-6 max-w-sm mx-auto">
+          <TabsList className="grid grid-cols-3 mb-6 w-full max-w-sm mx-auto overflow-hidden h-auto">
             <TabsTrigger value="product">Product</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="technical">Technical</TabsTrigger>
