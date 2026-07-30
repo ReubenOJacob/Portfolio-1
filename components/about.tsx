@@ -8,13 +8,13 @@ export function About() {
         <div className="grid gap-12 lg:grid-cols-[16rem,1fr] lg:gap-16">
           <div>
             <h2 className="eyebrow">About</h2>
-            <div className="relative mt-8 hidden lg:block aspect-[4/5] overflow-hidden rounded-sm border border-faint">
+            <div className="relative mt-8 aspect-[4/5] w-48 sm:w-56 lg:w-full overflow-hidden rounded-sm border border-faint">
               <Image
                 src="/images/profile-photo.jpg"
                 alt="Reuben Jacob at a café table with a laptop, looking out the window"
                 fill
                 className="object-cover photo-quiet"
-                sizes="16rem"
+                sizes="(max-width: 1024px) 14rem, 16rem"
               />
             </div>
           </div>
