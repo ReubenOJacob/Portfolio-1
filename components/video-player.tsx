@@ -8,11 +8,12 @@ interface VideoPlayerProps {
 
 export function VideoPlayer({ src, className, title }: VideoPlayerProps) {
   return (
-    <div className={cn("relative w-full aspect-video rounded-lg overflow-hidden", className)}>
+    <div className={cn("relative w-full aspect-video rounded-sm border border-faint overflow-hidden bg-card", className)}>
       <video
-        className="w-full h-full object-cover"
+        className="w-full h-full object-contain"
         controls
         playsInline
+        preload="metadata"
         title={title}
       >
         <source src={src} type="video/mp4" />
@@ -20,4 +21,4 @@ export function VideoPlayer({ src, className, title }: VideoPlayerProps) {
       </video>
     </div>
   )
-} 
+}

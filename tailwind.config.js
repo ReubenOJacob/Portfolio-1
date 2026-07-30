@@ -1,110 +1,104 @@
+/** Wraps a bare OKLCH channel token from globals.css so Tailwind can inject
+ *  alpha — `bg-background/80` etc. compile to `oklch(var(--background) / .8)`.
+ *  A raw `var(--x)` here would make every opacity modifier silently emit no CSS. */
+const token = (name) => `oklch(var(${name}) / <alpha-value>)`
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.5rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1152px",
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+      },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: token("--border"),
+        input: token("--input"),
+        ring: token("--ring"),
+        background: token("--background"),
+        foreground: token("--foreground"),
+        brand: token("--brand"),
+        faint: token("--faint"),
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: token("--primary"),
+          foreground: token("--primary-foreground"),
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: token("--secondary"),
+          foreground: token("--secondary-foreground"),
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: token("--destructive"),
+          foreground: token("--destructive-foreground"),
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: token("--muted"),
+          foreground: token("--muted-foreground"),
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: token("--accent"),
+          foreground: token("--accent-foreground"),
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: token("--popover"),
+          foreground: token("--popover-foreground"),
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: token("--card"),
+          foreground: token("--card-foreground"),
         },
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: 0 },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        md: "var(--radius)",
+        sm: "var(--radius)",
       },
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: "none",
-            color: "inherit",
+            maxWidth: "68ch",
+            color: "oklch(var(--foreground))",
             a: {
-              color: "inherit",
+              color: "oklch(var(--brand))",
               textDecoration: "none",
+              "&:hover": {
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
+              },
             },
-            h1: {
-              color: "inherit",
-            },
-            h2: {
-              color: "inherit",
-            },
-            h3: {
-              color: "inherit",
-            },
-            h4: {
-              color: "inherit",
+            "h1, h2, h3, h4": {
+              color: "oklch(var(--foreground))",
+              fontFamily: "var(--font-serif), Georgia, serif",
+              fontWeight: "400",
             },
             blockquote: {
-              color: "inherit",
-            },
-            code: {
-              color: "inherit",
+              color: "oklch(var(--muted-foreground))",
+              fontStyle: "italic",
             },
             strong: {
-              color: "inherit",
+              color: "oklch(var(--foreground))",
+              fontWeight: "600",
+            },
+            code: {
+              color: "oklch(var(--foreground))",
             },
           },
         },
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography")],
 }

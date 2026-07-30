@@ -4,101 +4,111 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { usePathname } from "next/navigation"
 
-interface HeaderProps {
-  isProjectPage?: boolean
-}
+const navLinks = [
+  { hash: "#projects", label: "Work" },
+  { hash: "#about", label: "About" },
+  { hash: "#contact", label: "Contact" },
+]
 
-export function Header({ isProjectPage = false }: HeaderProps) {
+export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
+  const isHome = pathname === "/"
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0)
     }
-    window.addEventListener("scroll", handleScroll)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+  // Off the homepage the sections don't exist, so fall back to a real navigation.
+  const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`)
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    if (isProjectPage) {
-      window.location.href = `/${href}`
-    } else {
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
-      }
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    setIsMenuOpen(false)
+    if (!isHome) return
+
+    const element = document.querySelector(hash)
+    if (element) {
+      e.preventDefault()
+      element.scrollIntoView({ behavior: "smooth" })
     }
   }
 
-  const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#product-management", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact" },
-  ]
-
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-200 ${isScrolled ? "bg-background/80 backdrop-blur-md border-b" : "bg-transparent"}`}
+      className={`sticky top-0 z-50 w-full bg-background transition-[border-color] duration-200 border-b ${
+        isScrolled ? "border-faint" : "border-transparent"
+      }`}
     >
-      <div className="container mx-auto px-4 py-4">
-        <div className="relative flex items-center justify-between h-10">
-          <a
-            href="/"
-            className="font-bold text-xl dark:gradient-text flex items-center h-full"
-          >
-            Reuben Jacob
-          </a>
-          <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-sm font-medium transition-colors hover:text-primary"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <div className="flex items-center space-x-1">
-            <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={toggleMenu}
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:text-sm"
+      >
+        Skip to content
+      </a>
+      <div className="container flex items-center justify-between py-5">
+        <a href="/" className="font-serif text-lg leading-none">
+          Reuben Jacob
+        </a>
+        <nav className="hidden md:flex items-center gap-10" aria-label="Primary">
+          {navLinks.map((link) => (
+            <a
+              key={link.hash}
+              href={hrefFor(link.hash)}
+              onClick={(e) => handleNavClick(e, link.hash)}
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
-        </div>
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="https://syphonlabs.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-brand hover:underline underline-offset-4"
+          >
+            Syphon Labs&thinsp;↗
+          </a>
+        </nav>
+        <button
+          type="button"
+          className="md:hidden -mr-2 p-2 text-foreground"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-nav"
+        >
+          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
       {isMenuOpen && (
-        <div className="md:hidden">
-          <nav className="container mx-auto px-4 py-4 space-y-4">
+        <div id="mobile-nav" className="md:hidden bg-background border-b border-faint">
+          <nav className="container py-4 space-y-1" aria-label="Primary mobile">
             {navLinks.map((link) => (
               <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="block text-sm font-medium transition-colors hover:text-primary"
+                key={link.hash}
+                href={hrefFor(link.hash)}
+                onClick={(e) => handleNavClick(e, link.hash)}
+                className="flex min-h-11 items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
             ))}
+            <a
+              href="https://syphonlabs.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-h-11 items-center text-sm text-brand"
+            >
+              Syphon Labs&thinsp;↗
+            </a>
           </nav>
         </div>
       )}

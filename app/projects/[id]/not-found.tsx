@@ -1,16 +1,19 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 
 export default function NotFound() {
   return (
-    <div className="container flex flex-col items-center justify-center min-h-[70vh] text-center">
-      <h1 className="text-4xl font-bold mb-4 dark:gradient-text">Project Not Found</h1>
-      <p className="text-muted-foreground mb-8 max-w-md">
-        Sorry, the project you're looking for doesn't exist or has been removed.
+    <div className="container flex flex-col items-start justify-center min-h-[60vh]">
+      <p className="eyebrow mb-6">404</p>
+      <h1 className="font-serif text-3xl md:text-4xl leading-tight">This project does not exist.</h1>
+      <p className="mt-4 text-muted-foreground max-w-[48ch]">
+        It may have been removed, or the address was mistyped.
       </p>
-      <Button asChild className="dark:hover-glow">
-        <Link href="/#projects">Back to Projects</Link>
-      </Button>
+      <Link
+        href="/#projects"
+        className="mt-8 text-sm underline underline-offset-4 decoration-faint hover:decoration-foreground transition-colors"
+      >
+        Back to selected work
+      </Link>
     </div>
   )
 }

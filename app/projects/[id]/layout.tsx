@@ -1,7 +1,6 @@
 import type React from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { ThemeProvider } from "@/components/theme-provider"
 
 export default function ProjectLayout({
   children,
@@ -9,16 +8,10 @@ export default function ProjectLayout({
   children: React.ReactNode
 }) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-      storageKey="portfolio-theme"
-    >
-      <Header isProjectPage />
-      <main>{children}</main>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main id="main" className="flex-1">{children}</main>
       <Footer />
-    </ThemeProvider>
+    </div>
   )
 }

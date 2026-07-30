@@ -1,31 +1,51 @@
 import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Libre_Caslon_Text, Public_Sans } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+// Only the 400-normal cut renders anywhere on the site; declaring the bold and
+// italic cuts would preload three font files nothing uses.
+const serif = Libre_Caslon_Text({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal"],
+  variable: "--font-serif",
+  display: "swap",
+})
+
+const sans = Public_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+})
+
+const title = "Reuben Jacob · Co-Founder & CEO, Syphon Labs"
+const description =
+  "Co-founder and CEO of Syphon Labs, building AI agents for recruiting and the people data that powers them. A track record across healthcare operations, data products, and published research."
+
+export const viewport: Viewport = {
+  themeColor: "#f7f3ec",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+}
 
 export const metadata: Metadata = {
-  title: "Reuben Jacob - Product Manager & Data Analyst Portfolio",
-  description: "Product Manager & Data Analyst specializing in data-driven product strategy, user-centered solutions, and business analytics. View my projects, experience, and professional certifications.",
+  title,
+  description,
   keywords: [
-    "Product Manager",
-    "Data Analyst", 
-    "Business Analytics",
-    "Product Strategy",
-    "Data Visualization",
-    "Tableau",
-    "SQL",
-    "Python",
-    "User Research",
-    "Market Analysis",
-    "KPI Dashboard",
-    "Business Intelligence",
-    "McKinsey Forward",
-    "Google Data Analytics",
-    "Portfolio",
-    "New York"
+    "Reuben Jacob",
+    "Syphon Labs",
+    "Talenry",
+    "Co-Founder",
+    "CEO",
+    "AI agents",
+    "Recruiting",
+    "LLM applications",
+    "Product Leadership",
+    "Workflow Automation",
+    "Data Analytics",
+    "Bangalore",
   ],
   authors: [{ name: "Reuben Jacob" }],
   creator: "Reuben Jacob",
@@ -35,32 +55,22 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://reubenjacob.com'),
+  metadataBase: new URL("https://reubenjacob.com"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
-    title: "Reuben Jacob - Product Manager & Data Analyst Portfolio",
-    description: "Product Manager & Data Analyst specializing in data-driven product strategy, user-centered solutions, and business analytics. View my projects, experience, and professional certifications.",
-    url: 'https://reubenjacob.com',
-    siteName: 'Reuben Jacob Portfolio',
-    images: [
-      {
-        url: '/images/profile.JPG',
-        width: 1200,
-        height: 630,
-        alt: 'Reuben Jacob - Product Manager & Data Analyst',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
+    title,
+    description,
+    url: "/",
+    siteName: "Reuben Jacob",
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: "Reuben Jacob - Product Manager & Data Analyst Portfolio",
-    description: "Product Manager & Data Analyst specializing in data-driven product strategy, user-centered solutions, and business analytics.",
-    images: ['/images/profile.JPG'],
-    creator: '@reubenjacob',
+    card: "summary_large_image",
+    title,
+    description,
   },
   robots: {
     index: true,
@@ -68,15 +78,10 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
-  },
-  verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
   },
   icons: {
     icon: "/favicon.ico",
@@ -93,50 +98,40 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Reuben Jacob",
-    "jobTitle": "Product Manager & Data Analyst",
-    "description": "Product Manager & Data Analyst specializing in data-driven product strategy, user-centered solutions, and business analytics.",
-    "url": "https://reubenjacob.com",
-    "image": "https://reubenjacob.com/images/profile.JPG",
-    "sameAs": [
-      "https://www.linkedin.com/in/reubenojacob/",
-      "https://github.com/ReubenOJacob"
-    ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "NYC Health and Hospitals"
+    name: "Reuben Jacob",
+    jobTitle: "Co-Founder & CEO",
+    description,
+    url: "https://reubenjacob.com",
+    image: "https://reubenjacob.com/images/headshot.jpg",
+    email: "reubenjacob16@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bangalore",
+      addressRegion: "Karnataka",
+      addressCountry: "IN",
     },
-    "alumniOf": {
+    sameAs: ["https://www.linkedin.com/in/reubenojacob/", "https://github.com/ReubenOJacob"],
+    worksFor: {
       "@type": "Organization",
-      "name": "New York University"
+      name: "Syphon Labs",
+      url: "https://syphonlabs.com",
     },
-    "knowsAbout": [
+    alumniOf: {
+      "@type": "Organization",
+      name: "New York University",
+    },
+    knowsAbout: [
+      "AI Infrastructure",
       "Product Management",
+      "Workflow Automation",
       "Data Analytics",
       "Business Intelligence",
-      "Tableau",
-      "SQL",
-      "Python",
-      "User Research",
-      "Market Analysis"
     ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "New York",
-      "addressRegion": "NY",
-      "addressCountry": "US"
-    }
   }
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="//cdn.credly.com" />
-        <meta name="theme-color" content="#3B82F6" />
-        <meta name="msapplication-TileColor" content="#3B82F6" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -144,29 +139,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className} suppressHydrationWarning>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          storageKey="portfolio-theme"
-        >
-          {children}
-        </ThemeProvider>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Remove Grammarly and other extension attributes
-              document.body.removeAttribute('data-gr-ext-installed');
-              document.body.removeAttribute('data-new-gr-c-s-check-loaded');
-            `,
-          }}
-        />
+      <body className={`${sans.variable} ${serif.variable} font-sans antialiased`} suppressHydrationWarning>
+        {children}
       </body>
     </html>
   )
 }
-
-
-import './globals.css'

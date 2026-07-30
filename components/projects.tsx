@@ -1,244 +1,84 @@
-import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { useRef } from "react"
+import { ArrowRight } from "lucide-react"
+import { compactYears, projects } from "@/lib/projects"
 
 export function Projects() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -400 : 400
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' })
-    }
-  }
-
-  const projects = [
-    {
-      id: "syphon-labs",
-      title: "Syphon Labs – AI Startup",
-      description:
-        "Co-founded Syphon Labs, an AI-powered startup building intelligent tools that automate workflows and surface actionable insights for modern teams.",
-      image: "/images/Draft%20Images/Syphon%20Labs%20Logo.png",
-      tags: [
-        "AI Product Strategy",
-        "Startup Founding",
-        "Workflow Automation",
-        "Go-to-Market",
-        "Product Roadmap",
-        "LLM Applications",
-      ],
-      liveUrl: "https://syphonlabs.com/",
-      liveUrlText: "Visit Syphon Labs"
-    },
-    {
-      id: "tableau-portfolio",
-      title: "Personal Projects – Tableau Dashboard Portfolio",
-      description:
-        "Independently designed and developed a portfolio of Tableau dashboards to enhance skills in data analysis, visualization, and business intelligence.",
-      image: "/images/tableau-portfolio-title.jpg",
-      tags: [
-        "Data Visualization",
-        "Business Analytics",
-        "KPI Tracking",
-        "Public Health Analytics",
-        "Interactive Dashboards",
-        "Self-Driven Learning",
-        "Insight Generation",
-        "Dashboard Design"
-      ],
-      liveUrl: "https://public.tableau.com/app/profile/reuben.jacob3448/vizzes",
-      liveUrlText: "View My Tableau Projects"
-    },
-    {
-      id: "treevah",
-      title: "Treevah – Strategic Analytics & Growth Optimization",
-      description:
-        "Directed a cross-functional team in developing and executing data-driven strategies to accelerate business growth and operational efficiency.",
-      image: "/images/treevah-title.jpg",
-      tags: [
-        "Business Analytics",
-        "Financial Modeling",
-        "KPI Dashboard Development",
-        "Market Research",
-        "Pricing Strategy",
-        "User Retention",
-        "Project Management",
-        "Competitive Analysis"
-      ]
-    },
-    {
-      id: "nyc-health-harlem",
-      title: "NYC Health + Hospitals Harlem – Data Pipeline & Analytics Transformation",
-      description:
-        "Led a business-critical initiative to modernize healthcare data infrastructure and analytics, focusing on operational efficiency, data quality, and actionable insights for leadership.",
-      image: "/images/nyc-health-harlem-title.jpg",
-      tags: [
-        "Healthcare Data Integration",
-        "Business Analytics",
-        "Workflow Automation",
-        "KPI Dashboard Development",
-        "Agile Project Management",
-        "Stakeholder Engagement",
-        "Operational Efficiency",
-        "Data-Driven Decision Making"
-      ]
-    },
-    {
-      id: "springer-research",
-      title: "Springer Research Team 1",
-      description:
-        "Led a team of four researchers in building an IoT-Based Wearable Tachycardia Monitor, a real-time heart rate monitoring device that integrates hardware, software, and medical device standards.",
-      image: "/images/springer-research-title.jpg",
-      tags: ["IoT Development", "Machine Learning", "Medical Device Compliance"],
-      liveUrl: "https://link.springer.com/chapter/10.1007/978-981-19-0151-5_10"
-    },
-    {
-      id: "springer-research-2",
-      title: "Springer Research Team 2",
-      description:
-        "Led a cross-functional team in developing an autonomous, self-balancing bicycle with GPS tracking, creating an assistive mobility solution for individuals with mobility challenges.",
-      image: "/images/self-balancing-bicycle-title.jpg",
-      tags: ["Embedded Systems", "Autonomous Mobility", "Assistive Technology"],
-      liveUrl: "https://link.springer.com/chapter/10.1007/978-981-16-2543-5_26"
-    },
-    {
-      id: "ieee-research",
-      title: "IEEE Research Team",
-      description:
-        "Led the development of an IoT-based personal safety device with GPS tracking and SOS broadcasting, designed to enhance security for vulnerable groups.",
-      image: "/images/gps-tracker-title.jpg",
-      tags: ["IoT Architecture", "Personal Safety", "GPS Tracking"],
-      liveUrl: "https://ieeexplore.ieee.org/abstract/document/9752019"
-    },
-    {
-      id: "edhitha-uas",
-      title: "Edhitha Unmanned Aerial Systems",
-      description:
-        "Led the end-to-end development and project management of an advanced Unmanned Autonomous Aerial System (UAS) for the 2018 AUVSI SUAS Competition.",
-      image: "/images/edhitha-uas-title.jpg",
-      tags: [
-        "Project Management",
-        "Autonomous Navigation",
-        "Systems Engineering",
-        "UAV Hardware Integration",
-        "Real-Time Imaging",
-        "Flight Testing",
-        "AUVSI SUAS Competition"
-      ],
-      liveUrl: "https://suas-competition.org/",
-      githubUrl: "https://www.newindianexpress.com/cities/bengaluru/2018/Jun/25/city-lads-impress-with-electric-unmanned-plane-1833236.html"
-    }
-  ]
+  const featured = projects.filter((p) => p.tier === "featured")
+  const listed = projects.filter((p) => p.tier === "listed")
 
   return (
-    <section id="projects" className="py-16 md:py-24">
-      <div className="container px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 md:mb-4 dark:gradient-text">
-          Featured Projects
-        </h2>
-        <p className="text-center text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto text-sm md:text-base">
-          A selection of my recent work in product management and data analytics
-        </p>
+    <section id="projects" className="border-b border-faint scroll-mt-20">
+      <div className="container py-16 md:py-24">
+        <div className="grid gap-12 lg:grid-cols-[16rem,1fr] lg:gap-16">
+          <div>
+            <h2 className="eyebrow">Selected work</h2>
+            <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-[24ch] hidden lg:block">
+              The company now, and the operating and research work before it.
+            </p>
+          </div>
 
-        <div className="relative group">
-          <div
-            ref={scrollContainerRef}
-            className="overflow-hidden pb-4 snap-x snap-mandatory overflow-x-auto"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            <div className="flex gap-6 md:gap-8">
-              {projects.map((project) => (
-                <Card
-                  key={project.id}
-                  className="overflow-hidden flex-shrink-0 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] snap-center dark:card transition-all duration-300 hover:shadow-md dark:hover-glow"
+          <div>
+            {featured.map((project) => (
+              <Link
+                key={project.id}
+                href={`/projects/${project.id}`}
+                className="group block border-b border-faint pb-10 mb-4"
+              >
+                <p className="eyebrow !text-[11px] mb-4">Now</p>
+                <h3 className="font-serif text-3xl md:text-4xl leading-tight decoration-1 underline-offset-4 group-hover:underline">
+                  {project.title}
+                </h3>
+                <p className="mt-4 text-base text-muted-foreground leading-relaxed max-w-[58ch]">
+                  {project.description}
+                </p>
+                <p className="mt-5 inline-flex items-center gap-2 text-sm">
+                  The full story
+                  <ArrowRight
+                    className="h-4 w-4 text-brand transition-transform group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </p>
+              </Link>
+            ))}
+
+            <h3 className="eyebrow !text-[11px] pt-6 pb-2">Before</h3>
+            <ol>
+              {listed.map((project) => (
+                <li key={project.id} className="border-b border-faint">
+                  <Link
+                    href={`/projects/${project.id}`}
+                    className="group flex items-baseline gap-4 py-4"
                   >
-                    <div className="relative h-48 w-full">
-                      <Image 
-                        src={project.image || "/placeholder.svg"} 
-                        alt={project.title} 
-                        fill 
-                        className="object-contain"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    <span>
+                      <span className="font-serif text-lg md:text-xl leading-snug decoration-1 underline-offset-4 group-hover:underline">
+                        {project.title}
+                      </span>
+                      {project.mark && (
+                        <span className="hidden sm:inline text-xs text-muted-foreground whitespace-nowrap ml-4">
+                          {project.mark}
+                        </span>
+                      )}
+                      {/* On phones the side columns are hidden, so carry the meta below the title. */}
+                      <span className="block sm:hidden mt-1 text-xs text-muted-foreground">
+                        {[compactYears(project.timeline), project.mark].filter(Boolean).join(" · ")}
+                      </span>
+                    </span>
+                    <span className="ml-auto flex items-center gap-3 whitespace-nowrap">
+                      <span className="text-xs text-muted-foreground tabular-nums hidden md:inline">
+                        {compactYears(project.timeline)}
+                      </span>
+                      <ArrowRight
+                        className="h-4 w-4 self-center text-muted-foreground transition-colors group-hover:text-brand"
+                        aria-hidden="true"
                       />
-                    </div>
-
-                    <CardContent className="p-4 sm:p-6">
-                      <div className="space-y-4">
-                        <div>
-                          <h3 className="text-lg md:text-xl font-bold mb-2">{project.title}</h3>
-                          <p className="text-muted-foreground text-sm md:text-base">
-                            {project.description}
-                          </p>
-                        </div>
-
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.tags.slice(0, 3).map((tag) => (
-                            <Badge key={tag} variant="secondary" className="text-xs dark:bg-primary/20 dark:text-primary">
-                              {tag}
-                            </Badge>
-                          ))}
-                          {project.tags.length > 3 && (
-                            <Badge variant="outline" className="text-xs">
-                              +{project.tags.length - 3}
-                            </Badge>
-                          )}
-                        </div>
-
-                        <Button 
-                          asChild 
-                          variant="ghost" 
-                          size="sm" 
-                          className="p-0 hover:bg-transparent group"
-                        >
-                          <a 
-                            href={`/projects/${project.id}`} 
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2"
-                          >
-                            <span className="text-sm font-medium">View Details</span>
-                            <ArrowRight 
-                              className="h-6 w-6 text-[#3B82F6] dark:text-[#60A5FA] transition-transform duration-200 group-hover:translate-x-1" 
-                              strokeWidth={3}
-                            />
-                          </a>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 h-8 w-8 rounded-full border-2 bg-background/80 border-blue-500 hover:border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.6)] flex items-center justify-center transition-all duration-300"
-            onClick={() => scroll('left')}
-            aria-label="Scroll left"
-          >
-            <ChevronLeft className="h-4 w-4 text-blue-400" strokeWidth={2.5} />
-          </Button>
-
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 h-8 w-8 rounded-full border-2 bg-background/80 border-blue-500 hover:border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.6)] flex items-center justify-center transition-all duration-300"
-            onClick={() => scroll('right')}
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="h-4 w-4 text-blue-400" strokeWidth={2.5} />
-          </Button>
-
-          <div className="absolute -inset-x-4 -inset-y-10 bg-gradient-to-r from-blue-400/30 via-transparent to-blue-600/30 blur-3xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
-
-
     </section>
   )
 }

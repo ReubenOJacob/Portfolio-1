@@ -26,14 +26,12 @@ export function ProjectGallery({ images, title, autoplay = true, interval = 4000
   }, [images.length])
 
   useEffect(() => {
-    if (!autoplay || isPaused) return
+    if (!autoplay || isPaused || images.length < 2) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
 
-    const intervalId = setInterval(() => {
-      nextSlide()
-    }, interval)
-
+    const intervalId = setInterval(nextSlide, interval)
     return () => clearInterval(intervalId)
-  }, [autoplay, interval, isPaused, nextSlide])
+  }, [autoplay, interval, isPaused, nextSlide, images.length])
 
   // Add swipe handlers for mobile
   const handlers = useSwipeable({
@@ -43,67 +41,77 @@ export function ProjectGallery({ images, title, autoplay = true, interval = 4000
     preventScrollOnSwipe: true,
   })
 
+  const hasMultiple = images.length > 1
+
   return (
     <div
-      className="relative w-full aspect-[16/9] rounded-lg overflow-hidden mb-8 group touch-action-none dark:card"
+      className="relative w-full aspect-[16/9] rounded-sm border border-faint overflow-hidden group touch-pan-y"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
+      aria-roledescription="carousel"
+      aria-label={`${title} gallery`}
       {...handlers}
     >
       {images.map((image, index) => (
         <div
-          key={index}
+          key={image}
           className={`absolute inset-0 transition-opacity duration-1000 ${
             index === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
           aria-hidden={index !== currentSlide}
         >
           <Image
-            src={image || "/placeholder.svg"}
-            alt={`${title} gallery image ${index + 1}`}
+            src={image}
+            alt={`${title} gallery image ${index + 1} of ${images.length}`}
             fill
-            className="object-contain bg-background/50 dark:bg-accent/50"
-            priority={index === currentSlide}
+            className="object-contain bg-card"
+            priority={index === 0}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
           />
         </div>
       ))}
 
-      {/* Navigation arrows - larger touch targets on mobile */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute left-0 top-1/2 -translate-y-1/2 bg-background/80 dark:bg-accent/80 opacity-0 group-hover:opacity-100 transition-opacity h-10 w-10 sm:h-12 sm:w-12"
-        onClick={prevSlide}
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
-      </Button>
+      {hasMultiple && (
+        <>
+          {/* Navigation arrows — kept visible on touch devices, which have no hover */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-background/80 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity h-11 w-11 sm:h-12 sm:w-12"
+            onClick={prevSlide}
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
+          </Button>
 
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute right-0 top-1/2 -translate-y-1/2 bg-background/80 dark:bg-accent/80 opacity-0 group-hover:opacity-100 transition-opacity h-10 w-10 sm:h-12 sm:w-12"
-        onClick={nextSlide}
-        aria-label="Next slide"
-      >
-        <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
-      </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-background/80 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 transition-opacity h-11 w-11 sm:h-12 sm:w-12"
+            onClick={nextSlide}
+            aria-label="Next slide"
+          >
+            <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
+          </Button>
 
-      {/* Indicators - larger on mobile */}
-      <div className="absolute bottom-4 left-0 right-0 hidden sm:flex justify-center gap-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`h-px sm:h-1.5 rounded-full transition-all ${
-              index === currentSlide ? "w-2 sm:w-4 bg-primary" : "w-px sm:w-1.5 bg-background/60 dark:bg-accent/60"
-            }`}
-            onClick={() => setCurrentSlide(index)}
-            aria-label={`Go to slide ${index + 1}`}
-            aria-current={index === currentSlide}
-          />
-        ))}
-      </div>
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+            {images.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                className={`h-1.5 rounded-full transition-all ${
+                  index === currentSlide ? "w-4 bg-foreground" : "w-1.5 bg-foreground/30"
+                }`}
+                onClick={() => setCurrentSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-current={index === currentSlide}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }
